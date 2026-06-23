@@ -1500,6 +1500,21 @@
       background: #2a1d18;
     }
 
+    .scan-target {
+      width: 100%;
+      min-height: 260px;
+      overflow: hidden;
+      border: 4px solid #7b4c2f;
+      border-radius: 8px;
+      background: #2a1d18;
+    }
+
+    .scan-target video,
+    .scan-target canvas {
+      width: 100%;
+      height: auto;
+    }
+
     .scan-hint {
       margin: 8px 0 0;
       color: #65402c;
@@ -1703,6 +1718,7 @@
     <div class="detail">
       <h2>ISBNバーコードを読む</h2>
       <video id="scanVideo" class="scan-video" playsinline muted></video>
+      <div id="scanTarget" class="scan-target" hidden></div>
       <p id="scanHint" class="scan-hint">本の裏表紙にあるISBNバーコードを画面内に入れてください。</p>
       <div class="dialog-actions">
         <button id="closeScan" class="small-btn" type="button">閉じる</button>
@@ -1716,6 +1732,7 @@
     const SETTINGS_KEY = "readingRoomSettingsV1";
     const SHELF_MODE_KEY = "readingRoomShelfModeV2";
     const ACHIEVEMENT_UNLOCKED_KEY = "readingRoomUnlockedAchievementsV4";
+    const QUAGGA_SRC = "https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js";
 
     const sampleBooks = [
       {
@@ -1796,6 +1813,7 @@
     let scanStream = null;
     let scanTimer = null;
     let barcodeDetector = null;
+    let quaggaActive = false;
 
     const $ = (selector) => document.querySelector(selector);
     const app = $("#app");
@@ -1817,6 +1835,7 @@
     const deleteDialog = $("#deleteDialog");
     const scanDialog = $("#scanDialog");
     const scanVideo = $("#scanVideo");
+    const scanTarget = $("#scanTarget");
     const scanHint = $("#scanHint");
 
     function today() {
@@ -2420,9 +2439,7 @@
 
     async function startBarcodeScan() {
       if (!("BarcodeDetector" in window)) {
-        statusEl.textContent = "このブラウザはバーコード読み取りに未対応です。ISBN手入力をご利用ください。";
-        showToast("カメラ読み取り未対応", "ISBN手入力はそのまま使えます");
-        return;
+        return startQuaggaScan();
       }
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         statusEl.textContent = "カメラを利用できません。HTTPS環境で開くか、ISBN手入力をご利用ください。";
@@ -2430,6 +2447,8 @@
       }
       try {
         barcodeDetector = new BarcodeDetector({ formats: ["ean_13", "ean_8", "upc_a", "upc_e"] });
+        scanVideo.hidden = false;
+        scanTarget.hidden = true;
         scanHint.textContent = "カメラを起動しています...";
         if (typeof scanDialog.showModal === "function") scanDialog.showModal();
         scanStream = await navigator.mediaDevices.getUserMedia({
@@ -2444,6 +2463,78 @@
         stopBarcodeScan();
         statusEl.textContent = "カメラを開始できませんでした。許可設定を確認するか、ISBN手入力をご利用ください。";
       }
+    }
+
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const existing = document.querySelector(`script[src="${src}"]`);
+        if (existing) {
+          existing.addEventListener("load", resolve, { once: true });
+          if (window.Quagga) resolve();
+          return;
+        }
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    async function startQuaggaScan() {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        statusEl.textContent = "カメラを利用できません。HTTPS環境で開くか、ISBN手入力をご利用ください。";
+        return;
+      }
+      try {
+        scanVideo.hidden = true;
+        scanTarget.hidden = false;
+        scanTarget.innerHTML = "";
+        scanHint.textContent = "iPhone Safari用の読み取り機能を読み込んでいます...";
+        if (typeof scanDialog.showModal === "function") scanDialog.showModal();
+        await loadScript(QUAGGA_SRC);
+        if (!window.Quagga) throw new Error("Quagga unavailable");
+        scanHint.textContent = "ISBNバーコードを枠内に入れてください。読み取ると自動で追加します。";
+        Quagga.init({
+          inputStream: {
+            type: "LiveStream",
+            target: scanTarget,
+            constraints: {
+              facingMode: "environment",
+              width: { min: 640 },
+              height: { min: 480 }
+            }
+          },
+          locator: { patchSize: "medium", halfSample: true },
+          decoder: { readers: ["ean_reader"] },
+          locate: true
+        }, (error) => {
+          if (error) {
+            statusEl.textContent = "カメラを開始できませんでした。許可設定を確認するか、ISBN手入力をご利用ください。";
+            stopBarcodeScan();
+            return;
+          }
+          quaggaActive = true;
+          Quagga.offDetected(handleQuaggaDetected);
+          Quagga.onDetected(handleQuaggaDetected);
+          Quagga.start();
+        });
+      } catch (error) {
+        stopBarcodeScan();
+        statusEl.textContent = "バーコード読み取り機能を読み込めませんでした。ISBN手入力をご利用ください。";
+        showToast("読み取り準備に失敗", "ISBN手入力はそのまま使えます");
+      }
+    }
+
+    async function handleQuaggaDetected(result) {
+      const code = result && result.codeResult && cleanIsbn(result.codeResult.code);
+      if (!code || code.length !== 13 || !/^97[89]/.test(code)) return;
+      scanHint.textContent = "バーコード読取成功。本情報を取得しています...";
+      statusEl.textContent = "バーコード読取成功。本情報を取得しています...";
+      stopBarcodeScan();
+      $("#isbnInput").value = code;
+      await addBookByIsbn(code);
     }
 
     async function scanLoop() {
@@ -2474,8 +2565,16 @@
         scanStream.getTracks().forEach((track) => track.stop());
         scanStream = null;
       }
+      if (quaggaActive && window.Quagga) {
+        Quagga.offDetected(handleQuaggaDetected);
+        Quagga.stop();
+        quaggaActive = false;
+      }
       scanVideo.pause();
       scanVideo.srcObject = null;
+      scanVideo.hidden = false;
+      scanTarget.hidden = true;
+      scanTarget.innerHTML = "";
       if (scanDialog.open) scanDialog.close();
     }
 
