@@ -406,18 +406,17 @@
 
     .room-level-panel {
       position: absolute;
-      top: 216px;
-      left: 112px;
+      top: 54px;
+      left: 114px;
       z-index: 7;
-      width: 116px;
-      padding: 6px 7px;
+      max-width: 150px;
+      padding: 7px 9px;
       border: 1px solid rgba(83, 47, 28, .34);
       border-radius: 7px;
       background: rgba(255, 238, 201, .86);
       box-shadow: 0 5px 13px rgba(50, 30, 18, .16);
-      font-size: 13px;
       font-weight: 900;
-      line-height: 1.18;
+      line-height: 1.25;
       pointer-events: none;
     }
 
@@ -425,7 +424,7 @@
       display: block;
       margin-top: 2px;
       color: #6f4930;
-      font-size: 9px;
+      font-size: 11px;
       font-weight: 800;
     }
 
@@ -1366,125 +1365,6 @@
       pointer-events: none;
     }
 
-    .harbor-calendar {
-      position: absolute;
-      top: 276px;
-      left: 112px;
-      z-index: 7;
-      width: 108px;
-      padding: 5px 7px;
-      border: 1px solid rgba(83, 47, 28, .28);
-      border-radius: 6px;
-      background: rgba(255, 241, 211, .82);
-      color: #5c3824;
-      font-size: 10px;
-      font-weight: 900;
-      line-height: 1.25;
-      box-shadow: 0 5px 12px rgba(50, 30, 18, .12);
-      pointer-events: none;
-    }
-
-    .reader-title {
-      position: absolute;
-      top: 327px;
-      left: 112px;
-      z-index: 7;
-      width: 108px;
-      padding: 5px 6px;
-      border-radius: 999px;
-      background: rgba(112, 68, 39, .82);
-      color: #fff2d4;
-      font-size: 10px;
-      font-weight: 900;
-      text-align: center;
-      pointer-events: none;
-    }
-
-    .harbor-event {
-      position: absolute;
-      inset: 0;
-      z-index: 5;
-      pointer-events: none;
-      opacity: 0;
-    }
-
-    .harbor-event.show {
-      opacity: 1;
-    }
-
-    .harbor-event.boat-event::before,
-    .harbor-event.gull-event::before,
-    .harbor-event.shooting-star-event::before,
-    .harbor-event.firework-event::before {
-      content: "";
-      position: absolute;
-      display: block;
-    }
-
-    .harbor-event.boat-event::before {
-      left: -35px;
-      bottom: 32px;
-      width: 30px;
-      height: 9px;
-      border-radius: 0 0 10px 10px;
-      background: #42271e;
-      animation: eventBoat 9s linear forwards;
-    }
-
-    .harbor-event.gull-event::before {
-      left: -24px;
-      top: 30px;
-      width: 24px;
-      height: 10px;
-      border-top: 2px solid rgba(255,255,255,.9);
-      border-radius: 50%;
-      box-shadow: 12px 0 0 -10px rgba(255,255,255,.9);
-      animation: eventGull 7s linear forwards;
-    }
-
-    .harbor-event.shooting-star-event::before {
-      right: 10px;
-      top: 20px;
-      width: 44px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #fff6bd);
-      transform: rotate(-24deg);
-      animation: eventStar 3.2s ease-out forwards;
-    }
-
-    .harbor-event.firework-event::before {
-      left: 92px;
-      top: 42px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #ffe39a;
-      box-shadow: 0 -14px 0 #ffe39a, 12px -7px 0 #ff9b82, 12px 7px 0 #ffe39a, 0 14px 0 #ff9b82, -12px 7px 0 #ffe39a, -12px -7px 0 #ff9b82;
-      animation: eventFirework 4s ease-out forwards;
-    }
-
-    @keyframes eventBoat {
-      to { transform: translateX(230px); opacity: .2; }
-    }
-
-    @keyframes eventGull {
-      0% { transform: translate(0, 0); opacity: 0; }
-      12% { opacity: 1; }
-      100% { transform: translate(220px, 18px); opacity: 0; }
-    }
-
-    @keyframes eventStar {
-      0% { transform: translate(0, 0) rotate(-24deg); opacity: 0; }
-      20% { opacity: 1; }
-      100% { transform: translate(-100px, 54px) rotate(-24deg); opacity: 0; }
-    }
-
-    @keyframes eventFirework {
-      0% { transform: scale(.1); opacity: 0; }
-      20% { opacity: 1; }
-      100% { transform: scale(1.25); opacity: 0; }
-    }
-
     .hamster-room {
       position: absolute;
       right: 22px;
@@ -1493,16 +1373,6 @@
       width: 128px;
       height: 86px;
       pointer-events: none;
-    }
-
-    .hamster-room .ham-lamp,
-    .hamster-room .ham-mini-shelf,
-    .hamster-room .ham-plant,
-    .hamster-room .ham-clock,
-    .hamster-room .ham-desk {
-      display: none;
-      position: absolute;
-      z-index: 1;
     }
 
     .hamster-room::before {
@@ -1541,65 +1411,6 @@
       border-radius: 50%;
       background: radial-gradient(ellipse at 35% 35%, #e6b889, #a55c48);
       box-shadow: inset -5px -4px rgba(94, 46, 35, .2);
-    }
-
-    .ham-lamp {
-      left: 9px;
-      bottom: 42px;
-      width: 15px;
-      height: 24px;
-      border-radius: 7px 7px 2px 2px;
-      background: radial-gradient(circle at 50% 30%, #ffe49a, #b35b37 62%);
-      box-shadow: 0 0 12px rgba(255, 211, 92, .35);
-    }
-
-    .ham-mini-shelf {
-      right: 49px;
-      bottom: 45px;
-      width: 31px;
-      height: 24px;
-      border: 3px solid #5b3524;
-      background: repeating-linear-gradient(90deg, #954334 0 5px, #2f6673 5px 10px, #c18b43 10px 15px);
-    }
-
-    .ham-plant {
-      left: 72px;
-      bottom: 10px;
-      width: 22px;
-      height: 32px;
-      background: radial-gradient(ellipse at 30% 25%, #547b3f 0 8px, transparent 9px), radial-gradient(ellipse at 72% 30%, #6b914d 0 8px, transparent 9px), linear-gradient(transparent 60%, #7e4630 61%);
-    }
-
-    .ham-clock {
-      right: 18px;
-      top: 2px;
-      width: 19px;
-      height: 19px;
-      border: 3px solid #5b3524;
-      border-radius: 50%;
-      background: #f6e6bd;
-    }
-
-    .ham-clock::before {
-      content: "";
-      position: absolute;
-      left: 7px;
-      top: 3px;
-      width: 2px;
-      height: 7px;
-      background: #5b3524;
-      transform-origin: bottom;
-      transform: rotate(35deg);
-    }
-
-    .ham-desk {
-      right: 12px;
-      bottom: 5px;
-      width: 38px;
-      height: 18px;
-      border-radius: 4px;
-      background: #704427;
-      box-shadow: 6px 13px 0 -4px #4d2d1d, -6px 13px 0 -4px #4d2d1d;
     }
 
     .hamster-wrap {
@@ -1646,58 +1457,6 @@
       height: 4px;
       background: #302018;
       box-shadow: 9px 5px 0 -1px #9b5f49;
-    }
-
-    .hamster-glasses,
-    .hamster-book,
-    .hamster-cap {
-      display: none;
-      position: absolute;
-      z-index: 4;
-    }
-
-    .hamster-glasses {
-      right: 1px;
-      top: 6px;
-      width: 19px;
-      height: 8px;
-      border: 2px solid #2f241e;
-      border-left-width: 0;
-      border-right-width: 0;
-      box-shadow: -10px 0 0 -2px transparent;
-    }
-
-    .hamster-glasses::before,
-    .hamster-glasses::after {
-      content: "";
-      position: absolute;
-      top: -2px;
-      width: 8px;
-      height: 8px;
-      border: 2px solid #2f241e;
-      border-radius: 50%;
-    }
-
-    .hamster-glasses::before { left: -7px; }
-    .hamster-glasses::after { right: -3px; }
-
-    .hamster-book {
-      left: 18px;
-      bottom: 4px;
-      width: 26px;
-      height: 16px;
-      border-radius: 2px;
-      background: linear-gradient(90deg, #f4e3bb 0 48%, #b14937 49% 52%, #f4e3bb 53%);
-      transform: rotate(-6deg);
-    }
-
-    .hamster-cap {
-      right: 4px;
-      top: -10px;
-      width: 22px;
-      height: 10px;
-      background: #4c2c23;
-      clip-path: polygon(50% 0, 100% 70%, 50% 100%, 0 70%);
     }
 
     .hamster-ear {
@@ -1751,46 +1510,6 @@
     .room-level-4 .hamster-wrap { animation: hamsterNearBooks 7s ease-in-out infinite; }
     .room-level-5 .hamster-wrap { animation: hamsterStroll 10s ease-in-out infinite; }
     .room-level-6 .hamster-wrap { animation: hamsterPatrol 11s ease-in-out infinite; }
-    .room-level-7 .hamster-wrap,
-    .room-level-8 .hamster-wrap { animation: hamsterRead 6s ease-in-out infinite; }
-    .room-level-3 .ham-lamp,
-    .room-level-4 .ham-lamp,
-    .room-level-5 .ham-lamp,
-    .room-level-6 .ham-lamp,
-    .room-level-7 .ham-lamp,
-    .room-level-8 .ham-lamp,
-    .room-level-4 .ham-mini-shelf,
-    .room-level-5 .ham-mini-shelf,
-    .room-level-6 .ham-mini-shelf,
-    .room-level-7 .ham-mini-shelf,
-    .room-level-8 .ham-mini-shelf,
-    .room-level-5 .ham-plant,
-    .room-level-6 .ham-plant,
-    .room-level-7 .ham-plant,
-    .room-level-8 .ham-plant,
-    .room-level-6 .ham-clock,
-    .room-level-7 .ham-clock,
-    .room-level-8 .ham-clock,
-    .room-level-7 .ham-desk,
-    .room-level-8 .ham-desk,
-    .room-level-5 .hamster-glasses,
-    .room-level-6 .hamster-glasses,
-    .room-level-7 .hamster-glasses,
-    .room-level-8 .hamster-glasses,
-    .room-level-6 .hamster-book,
-    .room-level-7 .hamster-book,
-    .room-level-8 .hamster-book,
-    .room-level-8 .hamster-cap {
-      display: block;
-    }
-
-    .room-level-8 .hamster-room::before {
-      background:
-        radial-gradient(circle at 50% 15%, rgba(255, 225, 130, .2), transparent 40%),
-        linear-gradient(90deg, rgba(255,255,255,.1), transparent 35%, rgba(0,0,0,.12)),
-        repeating-linear-gradient(90deg, #ad7042, #ad7042 13px, #8f5a39 13px, #8f5a39 26px);
-      box-shadow: 0 8px 13px rgba(47, 28, 16, .22), 0 0 22px rgba(255, 214, 112, .25);
-    }
 
     @keyframes hamsterSleep {
       0%, 100% { transform: translateY(0) scaleX(1); }
@@ -1822,43 +1541,6 @@
       0%, 100% { transform: translate(0, 0); }
       30% { transform: translate(38px, -8px); }
       60% { transform: translate(14px, -18px) scaleX(-1); }
-    }
-
-    @keyframes hamsterRead {
-      0%, 100% { transform: translate(10px, -2px) rotate(0); }
-      50% { transform: translate(10px, -4px) rotate(-2deg); }
-    }
-
-    .goal-meter {
-      display: grid;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .goal-bar {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 3px;
-    }
-
-    .goal-bar span {
-      height: 10px;
-      border-radius: 2px;
-      background: rgba(106, 74, 45, .18);
-    }
-
-    .goal-bar span.filled {
-      background: #8c4835;
-    }
-
-    .setting-number {
-      width: 92px;
-      min-height: 38px;
-      padding: 7px 8px;
-      border: 1px solid #9a7650;
-      border-radius: 5px;
-      background: #fff7df;
-      text-align: right;
     }
 
     .scan-video {
@@ -1894,8 +1576,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .toast,
-      .hamster-wrap,
-      .harbor-event.show::before {
+      .hamster-wrap {
         animation: none;
       }
     }
@@ -1936,7 +1617,6 @@
               <span style="left:50%;animation-delay:1.8s"></span>
               <span style="left:76%;animation-delay:3s"></span>
             </div>
-            <div id="harborEvent" class="harbor-event" aria-hidden="true"></div>
           </div>
         </div>
         <button id="shelfShortcut" class="shelf-side" type="button" aria-label="本棚画面へ">
@@ -1954,21 +1634,10 @@
         </div>
         <div class="tatami"></div>
         <div class="hamster-room" aria-hidden="true">
-          <div class="ham-lamp"></div>
-          <div class="ham-mini-shelf"></div>
-          <div class="ham-plant"></div>
-          <div class="ham-clock"></div>
-          <div class="ham-desk"></div>
           <div class="hamster-cushion"></div>
           <div id="hamsterWrap" class="hamster-wrap">
             <div id="hamsterBubble" class="hamster-bubble">今日も一冊？</div>
-            <div class="hamster">
-              <span class="hamster-ear"></span>
-              <span class="hamster-foot"></span>
-              <span class="hamster-glasses"></span>
-              <span class="hamster-book"></span>
-              <span class="hamster-cap"></span>
-            </div>
+            <div class="hamster"><span class="hamster-ear"></span><span class="hamster-foot"></span></div>
           </div>
         </div>
         <div class="table-wrap" aria-label="丸テーブルと読了本のタワー">
@@ -1981,8 +1650,6 @@
         <div id="bookCount" class="count-badge">0冊</div>
       </div>
       <div id="roomLevelPanel" class="room-level-panel">読書部屋 Lv.1<small>次のレベルまであと5冊</small></div>
-      <div id="harborCalendar" class="harbor-calendar">港町カレンダー</div>
-      <div id="readerTitle" class="reader-title">読書初心者</div>
       <form id="addForm" class="add-panel">
         <div class="isbn-row">
           <input id="isbnInput" class="input" inputmode="numeric" autocomplete="off" placeholder="ISBNを入力" aria-label="ISBNバーコード番号">
@@ -2065,14 +1732,6 @@
           <div class="setting-row">
             <label for="seasonToggle">季節演出</label>
             <label class="switch"><input id="seasonToggle" type="checkbox"><span class="slider"></span></label>
-          </div>
-          <div class="setting-row">
-            <label for="monthlyGoal">月間目標冊数</label>
-            <input id="monthlyGoal" class="setting-number" type="number" min="1" max="99" inputmode="numeric">
-          </div>
-          <div class="setting-row">
-            <label for="yearlyGoal">年間目標冊数</label>
-            <input id="yearlyGoal" class="setting-number" type="number" min="1" max="999" inputmode="numeric">
           </div>
         </div>
       </div>
@@ -2193,9 +1852,7 @@
       bgmVolume: 45,
       sfxVolume: 55,
       timeEffects: true,
-      seasonEffects: true,
-      monthlyGoal: 5,
-      yearlyGoal: 50
+      seasonEffects: true
     };
 
     const colors = ["#9a3f2f", "#3f6b70", "#b9783d", "#526f46", "#75485e", "#3e5f8b", "#8a5236", "#665234"];
@@ -2222,9 +1879,6 @@
     const achievementsGrid = $("#achievementsGrid");
     const yearSummary = $("#yearSummary");
     const roomLevelPanel = $("#roomLevelPanel");
-    const harborCalendar = $("#harborCalendar");
-    const readerTitle = $("#readerTitle");
-    const harborEvent = $("#harborEvent");
     const growingShelfBooks = $("#growingShelfBooks");
     const shelfShortcut = $("#shelfShortcut");
     const toastArea = $("#toastArea");
@@ -2341,7 +1995,6 @@
     function render() {
       renderStack();
       renderRoomLevel();
-      renderHarborCalendar();
       renderGrowingShelf();
       renderStats();
       renderAchievements();
@@ -2353,9 +2006,7 @@
     }
 
     function calculateRoomLevel(count = books.length) {
-      if (count >= 200) return { level: 8, next: null };
-      if (count >= 150) return { level: 7, next: 200 };
-      if (count >= 100) return { level: 6, next: 150 };
+      if (count >= 100) return { level: 6, next: null };
       if (count >= 50) return { level: 5, next: 100 };
       if (count >= 25) return { level: 4, next: 50 };
       if (count >= 10) return { level: 3, next: 25 };
@@ -2365,29 +2016,10 @@
 
     function renderRoomLevel() {
       const room = calculateRoomLevel();
-      app.classList.remove("room-level-1", "room-level-2", "room-level-3", "room-level-4", "room-level-5", "room-level-6", "room-level-7", "room-level-8");
+      app.classList.remove("room-level-1", "room-level-2", "room-level-3", "room-level-4", "room-level-5", "room-level-6");
       app.classList.add(`room-level-${room.level}`);
       const nextText = room.next ? `次のレベルまであと${room.next - books.length}冊` : "最高レベルの読書部屋";
       roomLevelPanel.innerHTML = `読書部屋 Lv.${room.level}<small>${books.length}冊読了 / ${nextText}</small>`;
-      readerTitle.textContent = getReaderTitle();
-    }
-
-    function getReaderTitle(count = books.length) {
-      if (count >= 200) return "伝説の読書家";
-      if (count >= 100) return "港町の司書";
-      if (count >= 50) return "書庫番";
-      if (count >= 25) return "読書家";
-      if (count >= 10) return "本好き";
-      if (count >= 1) return "読書初心者";
-      return "港町の新入り";
-    }
-
-    function renderHarborCalendar() {
-      const now = new Date();
-      const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
-      const seasonLabel = { spring: "春", summer: "夏", autumn: "秋", winter: "冬" }[getSeason(now)];
-      const timeLabel = { morning: "朝", day: "昼", evening: "夕方", night: "夜" }[getTimeBand(now)];
-      harborCalendar.innerHTML = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日（${weekdays[now.getDay()]}）<br>${seasonLabel}・${timeLabel}`;
     }
 
     function renderGrowingShelf() {
@@ -2467,12 +2099,6 @@
       };
     }
 
-    function goalBlocks(current, goal) {
-      const safeGoal = Math.max(1, Number(goal) || 1);
-      const filled = Math.max(0, Math.min(10, Math.round((current / safeGoal) * 10)));
-      return Array.from({ length: 10 }, (_, index) => `<span class="${index < filled ? "filled" : ""}"></span>`).join("");
-    }
-
     function calculateReadingStreaks() {
       const daySet = new Set(books.map((book) => book.readDate).filter(Boolean));
       const days = [...daySet].sort();
@@ -2507,16 +2133,6 @@
         <div class="stat-item"><span class="stat-label">推定総厚み</span><span class="stat-value">${stats.totalThicknessCm.toFixed(1)}cm</span></div>
         <div class="stat-item"><span class="stat-label">現在の連続日数</span><span class="stat-value">${stats.currentStreak}日</span></div>
         <div class="stat-item"><span class="stat-label">最長連続日数</span><span class="stat-value">${stats.longestStreak}日</span></div>
-        <div class="stat-item">
-          <span class="stat-label">月間目標 ${stats.monthCount}/${settings.monthlyGoal}冊</span>
-          <span class="stat-value">${Math.min(999, Math.round((stats.monthCount / Math.max(1, settings.monthlyGoal)) * 100))}%</span>
-          <div class="goal-meter"><div class="goal-bar">${goalBlocks(stats.monthCount, settings.monthlyGoal)}</div></div>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">年間目標 ${stats.yearCount}/${settings.yearlyGoal}冊</span>
-          <span class="stat-value">${Math.min(999, Math.round((stats.yearCount / Math.max(1, settings.yearlyGoal)) * 100))}%</span>
-          <div class="goal-meter"><div class="goal-bar">${goalBlocks(stats.yearCount, settings.yearlyGoal)}</div></div>
-        </div>
       `;
     }
 
@@ -2555,12 +2171,6 @@
       const mostPages = [...yearBooks].sort((a, b) => (Number(b.pageCount) || 0) - (Number(a.pageCount) || 0))[0];
       const first = yearBooks[0];
       const last = yearBooks[yearBooks.length - 1];
-      const authorRanking = Object.entries(yearBooks.reduce((acc, book) => {
-        const author = book.author || "著者不明";
-        acc[author] = (acc[author] || 0) + 1;
-        return acc;
-      }, {})).sort((a, b) => b[1] - a[1]).slice(0, 3);
-      const reviewedCount = yearBooks.filter((book) => String(book.shortReview || "").trim()).length;
       // Future: render this data to canvas/SVG for a shareable yearly reading card.
       yearSummary.innerHTML = `
         <div class="year-row"><span class="year-label">今年の冊数</span><span>${yearBooks.length}冊</span></div>
@@ -2569,8 +2179,6 @@
         <div class="year-row"><span class="year-label">最多ページ</span><span>${escapeHtml(mostPages ? `${mostPages.title} (${mostPages.pageCount}p)` : "まだありません")}</span></div>
         <div class="year-row"><span class="year-label">最初の一冊</span><span>${escapeHtml(first ? `${first.title} / ${first.readDate}` : "まだありません")}</span></div>
         <div class="year-row"><span class="year-label">最後の一冊</span><span>${escapeHtml(last ? `${last.title} / ${last.readDate}` : "まだありません")}</span></div>
-        <div class="year-row"><span class="year-label">好きな著者</span><span>${escapeHtml(authorRanking.length ? authorRanking.map(([name, count]) => `${name} ${count}冊`).join(" / ") : "まだありません")}</span></div>
-        <div class="year-row"><span class="year-label">感想を書いた本</span><span>${reviewedCount}冊</span></div>
       `;
     }
 
@@ -2624,32 +2232,6 @@
       };
       speak();
       setInterval(speak, 18000);
-    }
-
-    function hamsterReactToBook() {
-      const lines = ["新しい本だ！", "読んでみたい！", "また増えたね！", "積み上がってきたね"];
-      hamsterBubble.textContent = lines[Math.floor(Math.random() * lines.length)];
-      hamsterBubble.classList.add("show");
-      setTimeout(() => hamsterBubble.classList.remove("show"), 4800);
-    }
-
-    function triggerHarborEvent(forceType = "") {
-      if (!harborEvent || harborEvent.classList.contains("show")) return;
-      const timeBand = getTimeBand();
-      const candidates = timeBand === "night"
-        ? ["shooting-star-event", "firework-event", "boat-event"]
-        : ["boat-event", "gull-event"];
-      const type = forceType || candidates[Math.floor(Math.random() * candidates.length)];
-      harborEvent.className = `harbor-event ${type} show`;
-      setTimeout(() => {
-        harborEvent.className = "harbor-event";
-      }, 9500);
-    }
-
-    function startHarborEvents() {
-      setInterval(() => {
-        if (Math.random() < 0.38) triggerHarborEvent();
-      }, 32000);
     }
 
     function renderShelfViews() {
@@ -2900,7 +2482,6 @@
         saveBooks();
         render();
         showToast("新しい本を追加しました", book.title);
-        hamsterReactToBook();
         checkAchievementUnlocks();
         $("#isbnInput").value = "";
         statusEl.textContent = `「${book.title}」を読了本に追加しました。`;
@@ -3091,7 +2672,6 @@
       // v4/v5 expansion point: combine weather API data, rain layers,
       // environmental audio scene selection, and finer seasonal window motion here.
       applyScene();
-      renderHarborCalendar();
     }
 
     function bindSettings() {
@@ -3100,8 +2680,6 @@
       $("#sfxVolume").value = settings.sfxVolume;
       $("#timeToggle").checked = settings.timeEffects;
       $("#seasonToggle").checked = settings.seasonEffects;
-      $("#monthlyGoal").value = settings.monthlyGoal;
-      $("#yearlyGoal").value = settings.yearlyGoal;
 
       $("#ambientToggle").addEventListener("change", (event) => {
         settings.ambient = event.target.checked;
@@ -3124,16 +2702,6 @@
         settings.seasonEffects = event.target.checked;
         saveSettings();
         updateEnvironment();
-      });
-      $("#monthlyGoal").addEventListener("input", (event) => {
-        settings.monthlyGoal = Math.max(1, Number(event.target.value) || 1);
-        saveSettings();
-        renderStats();
-      });
-      $("#yearlyGoal").addEventListener("input", (event) => {
-        settings.yearlyGoal = Math.max(1, Number(event.target.value) || 1);
-        saveSettings();
-        renderStats();
       });
     }
 
@@ -3192,10 +2760,6 @@
       - Reading yearbook image generation: export renderYearSummary() data to canvas.
       - Cloud save: sync BOOKS_KEY data after local writes, with offline fallback.
       - Reading goals: add monthly/yearly targets without crowding the home room.
-      v6 candidates:
-      - Weather API and rain system for the harbor window.
-      - Environmental audio and seasonal sound scenes.
-      - Cloud sync, reading friends, SNS sharing, and PNG yearbook export.
     */
 
     loadBooks();
@@ -3209,7 +2773,6 @@
     });
     saveUnlockedAchievements();
     startHamsterTalk();
-    startHarborEvents();
     setInterval(updateEnvironment, 60 * 1000);
   </script>
 </body>
